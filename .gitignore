@@ -9,6 +9,11 @@
 #
 # Normal rules
 #
+Image
+boot/bootsect
+boot/setup
+tools/build
+tools/system
 .*
 *.o
 *.o.*

@@ -159,16 +159,18 @@ static unsigned long copy_strings(int argc,char ** argv,unsigned long *page,
 				if (from_kmem==2)
 					set_fs(old_fs);
 				if (!(pag = (char *) page[p/PAGE_SIZE]) &&
-				    !(pag = (char *) page[p/PAGE_SIZE] =
-				      (unsigned long *) get_free_page())) 
+				    !(page[p/PAGE_SIZE] = (unsigned long *) get_free_page())) 
 					return 0;
+				else
+					pag = (char *) page[p/PAGE_SIZE];
+
 				if (from_kmem==2)
 					set_fs(new_fs);
 
 			}
 			*(pag + offset) = get_fs_byte(tmp);
 		}
-	}
+	}	
 	if (from_kmem==2)
 		set_fs(old_fs);
 	return p;
