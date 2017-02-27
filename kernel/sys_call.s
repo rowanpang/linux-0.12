@@ -100,9 +100,9 @@ _system_call:
 	pushl %eax
 2:
 	movl _current,%eax
-	cmpl $0,state(%eax)		# state
+	cmpl $0,state(%eax)		# state  非running reschedule
 	jne reschedule
-	cmpl $0,counter(%eax)		# counter
+	cmpl $0,counter(%eax)		# counter 时间到 reschedule
 	je reschedule
 ret_from_sys_call:
 	movl _current,%eax
